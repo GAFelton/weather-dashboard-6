@@ -5,9 +5,9 @@ var currentCityHeader = $("currentCityHeader");
 var weatherDetailsArea = $("weatherDetailsArea");
 var fiveDayForecastArea = $("fiveDayForecastArea");
 var weatherAPIKey = config.MY_KEY;
+var thisSearch = searchBar.val().trim();
 
 function weatherData() {
-    var thisSearch = searchBar.val().trim();
     var queryURL = "api.openweathermap.org/data/2.5/weather?q=" + thisSearch + "&appid=" + weatherAPIKey;
     $.ajax({
         url: queryURL,
@@ -17,6 +17,15 @@ function weatherData() {
     });
 }
 
+function fiveDayData(){
+    var queryURL = "api.openweathermap.org/data/2.5/forecast?q=" + thisSearch + "&appid=" + weatherAPIKey;
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+
+    });
+}
 
 /* PSEUDOCODE:
 -weatherData api call function
