@@ -23,9 +23,15 @@ function fiveDayData(){
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-
+ // Create 5 cards, fill with data
     });
 }
+
+searchBar.on("submit", function(event){
+    event.preventDefault();
+    weatherData();
+    fiveDayData();
+})
 
 /* PSEUDOCODE:
 -weatherData api call function

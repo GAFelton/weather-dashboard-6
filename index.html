@@ -12,47 +12,64 @@
 
 <body>
 
-<header>
-    <h1>Weather Dashboard</h1>
-</header>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand h1">Weather Dashboard</a>
+    </nav>
 
-<!-- This aside contains City Search & the list of previously searched cities. -->
-<aside class="float-left" id="searchArea">
-    <h4> Search for a City:</h4>
-    <div id="searchBar">
+    <div class="row">
+        <!-- <div class="col-lg-1"> </div> -->
+        <div class="col-lg-3 col-sm-12">
+            <!-- This aside contains City Search & the list of previously searched cities. -->
+            <aside class="float-left" id="searchArea">
+                <h4> Search for a City:</h4>
+                <form>
+                    <div class="form-group">
+                        <!-- <label for="searchBar">Search for a City:</label> -->
+                        <input type="search" class="form-control" id="searchBar" aria-describedby="searchHelp"
+                            placeholder="Enter City">
+                        <small id="searchHelp" class="form-text text-muted">Search by "City" or "City, State."</small>
+                    </div>
+                </form>
 
-    </div>
+                <div id="previousSearchesArea">
 
-    <div id="previousSearchesArea">
+                </div>
 
-    </div>
-</aside>
-
-<!-- This section contains the main data viewing area for the dashboard app. -->
-<section>
-    <!-- Main Weather Details -->
-    <div>
-        <h2 id="currentCityHeader"></h2>
-        <div id="weatherDetailsArea">
-
-
+            </aside>
         </div>
-    </div>
 
-    <!-- 5 Day Forecast -->
-    <div>
-        <h3>5 Day Forecast:</h3>
-        <div id="fiveDayForecastArea">
+        <!-- This section contains the main data viewing area for the dashboard app. -->
 
+        <div class="col-lg-9 col-sm-12">
+            <section>
+                <!-- Main Weather Details -->
+                <div>
+                    <h2 id="currentCityHeader"></h2>
+                    <div id="weatherDetailsArea">
+
+
+                    </div>
+                </div>
+
+
+                <!-- 5 Day Forecast -->
+                <div>
+                    <h3>5 Day Forecast:</h3>
+                    <div id="fiveDayForecastArea">
+
+
+                    </div>
+                </div>
+            </section>
         </div>
+        <!-- <div class="col-lg-1"> </div> -->
     </div>
 
-</section>
 
 
 
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
