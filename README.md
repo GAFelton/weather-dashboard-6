@@ -13,7 +13,7 @@ Homework Assignment #6: Weather Dashboard
 
 
 
-
+API Keys are stored in a config.js file, as an object to be referenced. This is normally done so that keys are not accessible on GitHub. I have not included the config file in gitignore so the deployed page still works, but I wanted to get in the habit of doing this.
 
 
 *delete below*
