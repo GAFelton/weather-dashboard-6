@@ -1,14 +1,14 @@
 var searchArea = $("#searchArea");
 var searchBar = $("#searchBar");
 var previousSearchesArea = $("#previousSearchesArea");
-var currentCityHeader = $("currentCityHeader");
-var weatherDetailsArea = $("weatherDetailsArea");
-var fiveDayForecastArea = $("fiveDayForecastArea");
+var currentCityHeader = $("#currentCityHeader");
+var weatherDetailsArea = $("#weatherDetailsArea");
+var fiveDayForecastArea = $("#fiveDayForecastArea");
 var weatherAPIKey = config.MY_KEY;
-var thisSearch = searchBar.val().trim();
 
-function weatherData() {
-    var queryURL = "api.openweathermap.org/data/2.5/weather?q=" + thisSearch + "&appid=" + weatherAPIKey;
+
+function weatherData(query) {
+    var queryURL = "api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -17,8 +17,8 @@ function weatherData() {
     });
 }
 
-function fiveDayData(){
-    var queryURL = "api.openweathermap.org/data/2.5/forecast?q=" + thisSearch + "&appid=" + weatherAPIKey;
+function fiveDayData(query){
+    var queryURL = "api.openweathermap.org/data/2.5/forecast?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -29,8 +29,9 @@ function fiveDayData(){
 
 searchBar.on("submit", function(event){
     event.preventDefault();
-    weatherData();
-    fiveDayData();
+    var thisSearch = searchBar.val().trim();
+    weatherData(thisSearch);
+    fiveDayData(thisSearch);
 })
 
 /* PSEUDOCODE:
@@ -40,7 +41,10 @@ searchBar.on("submit", function(event){
     takes userInput and runs both api calls. 
     Adds userInput to localStorage.
 )
--previous searches function (getItem from localStorage)
+
+Need coordinates for the UVData(lat, lng). Get coordinates from the first weatherData(query). So calling the UVData function needs to happen inside of the .then part of weatherData.
+
+-previous searches function (getItem from localStorage) (listItem needs the click function bound when each item is created.)
 -localStorage setItem array of previous searches
 -onPageLoad if there are previous searches in localStorage, use the most recent one to run both api calls
 
