@@ -1,5 +1,6 @@
 var searchArea = $("#searchArea");
 var searchBar = $("#searchBar");
+var SearchBarButton = $("#searchBarButton");
 var previousSearchesArea = $("#previousSearchesArea");
 var currentCityHeader = $("#currentCityHeader");
 var weatherDetailsArea = $("#weatherDetailsArea");
@@ -8,37 +9,77 @@ var weatherAPIKey = config.MY_KEY;
 
 
 function weatherData(query) {
-    var queryURL = "api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + weatherAPIKey;
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
+        var currentCity = response.name;
+        var weatherDiv = $("<div class='weather'>");
+        var date = new Date(response.dt * 1000).toLocaleDateString("en-US");
+        // var iconIs = response.weather.icon;
+        // var iconURL = "http://openweathermap.org/img/w/" + iconIs + ".png";
+        // console.log(iconURL);
+        // var iconImg = $("<img class='weatherIcon'>");
+        // iconImg.attr('src', iconURL);
+        // var temperature = response.main.temp;
+        var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+        var tempSection = $("<p> Temperature: " + tempF + "&#8457;</p>");
+        var humidity = response.main.humidity;
+        var humiditySection = $("<p> Humidity: " + humidity + "% </p>");
+        var windSpeed = response.wind.speed;
+        var windSpeedSection = $("<p> Wind Speed: " + windSpeed + "MPH </p>");
+        var lat = response.coord.lat;
+        var lon = response.coord.lon;
+        var uvIndexDiv = $("<div id='uvIndex'>");
+
+        // function uvAPICall() {
+        //     var uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + weatherAPIKey + "&lat=" + lat + "&lon=" + lon;
+        //     $.ajax({
+        //         url: uvQueryURL,
+        //         method: "GET"
+        //     }).then(function (uvresponse) {
+        //         var uvIndex = uvresponse.value;
+        //         uvIndexDiv.text("UV Index: " + uvIndex);
+        //         console.log("UV Index: " + uvIndex);
+        //     });
+        // }
+        // uvAPICall();
+        currentCityHeader.text(currentCity + " (" + date + ") ");
+        weatherDetailsArea.append(weatherDiv);
+        weatherDiv.append(tempSection);
+        weatherDiv.append(humiditySection);
+        weatherDiv.append(windSpeedSection);
+        weatherDiv.append(uvIndexDiv);
 
     });
 }
 
-function fiveDayData(query){
-    var queryURL = "api.openweathermap.org/data/2.5/forecast?q=" + query + "&appid=" + weatherAPIKey;
+function fiveDayData(query) {
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
- // Create 5 cards, fill with data
+        // Create 5 cards, fill with data
     });
 }
 
-searchBar.on("submit", function(event){
+SearchBarButton.on("click", function (event) {
     event.preventDefault();
     var thisSearch = searchBar.val().trim();
+    weatherDetailsArea.empty();
+    fiveDayForecastArea.empty();
+    console.log(thisSearch);
     weatherData(thisSearch);
-    fiveDayData(thisSearch);
+    // fiveDayData(thisSearch);
 })
 
 /* PSEUDOCODE:
 -weatherData api call function
 -5day forecast api call function
 -search bar event listener (
-    takes userInput and runs both api calls. 
+    takes userInput and runs both api calls.
     Adds userInput to localStorage.
 )
 
