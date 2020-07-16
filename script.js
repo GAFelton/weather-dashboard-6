@@ -38,18 +38,19 @@ function weatherData(query) {
         var lon = response.coord.lon;
         var uvIndexDiv = $("<div id='uvIndex'>");
 
-        // function uvAPICall() {
-        //     var uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + weatherAPIKey + "&lat=" + lat + "&lon=" + lon;
-        //     $.ajax({
-        //         url: uvQueryURL,
-        //         method: "GET"
-        //     }).then(function (uvresponse) {
-        //         var uvIndex = uvresponse.value;
-        //         uvIndexDiv.text("UV Index: " + uvIndex);
-        //         console.log("UV Index: " + uvIndex);
-        //     });
-        // }
-        // uvAPICall();
+        function uvAPICall() {
+            var uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + weatherAPIKey + "&lat=" + lat + "&lon=" + lon;
+            $.ajax({
+                url: uvQueryURL,
+                method: "GET"
+            }).then(function (uvresponse) {
+                var uvIndex = uvresponse.value;
+                uvIndexDiv.text("UV Index: " + uvIndex);
+                console.log("UV Index: " + uvIndex);
+            });
+        }
+        uvAPICall();
+        
         currentCityHeader.text(currentCity + " (" + date + ") ");
         currentCityHeader.append(iconImg);
         weatherDetailsArea.append(weatherDiv);
