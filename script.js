@@ -9,9 +9,9 @@ var weatherAPIKey = config.MY_KEY;
 
 //Function to round to first decimal place - for temperature.
 function round(value, decimals) {
-    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-  }
-  
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+}
+
 function weatherData(query) {
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
@@ -21,12 +21,6 @@ function weatherData(query) {
         var currentCity = response.name;
         var weatherDiv = $("<div class='weather'>");
         var date = new Date(response.dt * 1000).toLocaleDateString("en-US");
-        // var iconIs = response.weather.icon;
-        // var iconURL = "http://openweathermap.org/img/w/" + iconIs + ".png";
-        // console.log(iconURL);
-        // var iconImg = $("<img class='weatherIcon'>");
-        // iconImg.attr('src', iconURL);
-        // var temperature = response.main.temp;
         var tempF = (response.main.temp - 273.15) * 1.80 + 32;
         tempF = round(tempF, 1);
         var tempSection = $("<p> Temperature: " + tempF + "&#8457;</p>");
@@ -34,6 +28,12 @@ function weatherData(query) {
         var humiditySection = $("<p> Humidity: " + humidity + "% </p>");
         var windSpeed = response.wind.speed;
         var windSpeedSection = $("<p> Wind Speed: " + windSpeed + "MPH </p>");
+        var iconIs = response.weather[0].icon;
+        console.log(iconIs);
+        var iconURL = "http://openweathermap.org/img/w/" + iconIs + ".png";
+        console.log(iconURL);
+        var iconImg = $("<img class='weatherIcon'>");
+        iconImg.attr('src', iconURL);
         var lat = response.coord.lat;
         var lon = response.coord.lon;
         var uvIndexDiv = $("<div id='uvIndex'>");
@@ -51,6 +51,7 @@ function weatherData(query) {
         // }
         // uvAPICall();
         currentCityHeader.text(currentCity + " (" + date + ") ");
+        currentCityHeader.append(iconImg);
         weatherDetailsArea.append(weatherDiv);
         weatherDiv.append(tempSection);
         weatherDiv.append(humiditySection);
