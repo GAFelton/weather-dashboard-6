@@ -7,7 +7,11 @@ var weatherDetailsArea = $("#weatherDetailsArea");
 var fiveDayForecastArea = $("#fiveDayForecastArea");
 var weatherAPIKey = config.MY_KEY;
 
-
+//Function to round to first decimal place - for temperature.
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+  }
+  
 function weatherData(query) {
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
@@ -24,6 +28,7 @@ function weatherData(query) {
         // iconImg.attr('src', iconURL);
         // var temperature = response.main.temp;
         var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+        tempF = round(tempF, 1);
         var tempSection = $("<p> Temperature: " + tempF + "&#8457;</p>");
         var humidity = response.main.humidity;
         var humiditySection = $("<p> Humidity: " + humidity + "% </p>");
