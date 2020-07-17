@@ -21,7 +21,7 @@ function weatherData(query) {
     }).then(function (response) {
         var currentCity = response.name;
         var weatherDiv = $("<div class='weather'>");
-        var date = new Date(response.dt * 1000).toLocaleDateString("en-US");
+        var date = new Date((response.dt + response.timezone) * 1000).toLocaleDateString("en-US");
         var tempF = (response.main.temp - 273.15) * 1.80 + 32;
         tempF = round(tempF, 1);
         var tempSection = $("<p> Temperature: " + tempF + "&#8457;</p>");
@@ -71,22 +71,35 @@ function fiveDayData(query) {
     }).then(function (response) {
         // Create 5 cards, fill with data
         var fiveCards = [];
-        for (i = 0; i<response.list.length; i+=8) {
-        var time = new Date(response.list[i].dt * 1000).toLocaleTimeString("en-US");
-        console.log(time + ", " + i);
-        fiveCards.push(time);
+        for (i = 0; i < response.list.length; i += 8) {
+            var time = new Date((response.list[i].dt + response.list[j].city.timezone) * 1000).toLocaleTimeString("en-US");
+            fiveCards.push(time);
         }
-    
-    console.log(fiveCards);
+        console.log(fiveCards);
 
-
-
-        var cardGroupDiv = $("<div class='card-group'>");
-        // for (){}
-       
-
+        var cardGroupDiv = $("<div class='card-deck'>");
         fiveDayForecastArea.append(cardGroupDiv);
 
+        for (j = 0; j < fiveCards.length; j++) {
+            var card = $("<div class='card text-white bg-primary mb-3'>");
+            var date = new Date((response.list[j].dt + response.list[j].city.timezone) * 1000).toLocaleDateString("en-US");
+            var cardHeader = $("<div class='card-header'>").text(date);
+            var cardBody = $("<div class='card-body'>");
+            var dayIcon = response.list[j].weather.icon;
+            var iconURL = "http://openweathermap.org/img/w/" + dayIcon + ".png";
+            var cardIcon = $("<img>").attr("src", iconURL);
+            var tempF = (response.list[j].main.temp - 273.15) * 1.80 + 32;
+            tempF = round(tempF, 1);
+            var cardTemp = $("<p class='card-text'>").text("Temp: " + tempF + "&#8457; ");
+            var cardHumidity = $("<p class='card-text'>").text("Humidity: " + response.list[j].main.humidity + "%");
+
+            cardGroupDiv.append(card);
+            card.append(cardHeader);
+            card.append(cardBody);
+            cardBody.append(cardIcon);
+            cardBody.append(cardTemp);
+            cardBody.append(cardHumidity);
+        }
     });
 }
 
