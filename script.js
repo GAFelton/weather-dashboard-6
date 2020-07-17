@@ -8,7 +8,7 @@ var fiveDayHeader = $("#fiveDayHeader");
 var fiveDayForecastArea = $("#fiveDayForecastArea");
 var weatherAPIKey = config.MY_KEY;
 
-//Function to round to first decimal place - for temperature.
+//Function to round to first decimal place - for temperature. - From Jack Moore ("https://www.jacklmoore.com/notes/rounding-in-javascript/")
 function round(value, decimals) {
     return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
 }
@@ -70,13 +70,19 @@ function fiveDayData(query) {
         method: "GET"
     }).then(function (response) {
         // Create 5 cards, fill with data
-
-        
+        var fiveCards = [];
+        for (i = 0; i<response.list.length; i+=8) {
+        var time = new Date(response.list[i].dt * 1000).toLocaleTimeString("en-US");
+        console.log(time + ", " + i);
+        fiveCards.push(time);
+        }
+    
+    console.log(fiveCards);
 
 
 
         var cardGroupDiv = $("<div class='card-group'>");
-        for (){}
+        // for (){}
        
 
         fiveDayForecastArea.append(cardGroupDiv);
@@ -91,7 +97,7 @@ SearchBarButton.on("click", function (event) {
     fiveDayForecastArea.empty();
     console.log(thisSearch);
     weatherData(thisSearch);
-    // fiveDayData(thisSearch);
+    fiveDayData(thisSearch);
 })
 
 /* PSEUDOCODE:
