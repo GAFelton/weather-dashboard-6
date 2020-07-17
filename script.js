@@ -4,6 +4,7 @@ var SearchBarButton = $("#searchBarButton");
 var previousSearchesArea = $("#previousSearchesArea");
 var currentCityHeader = $("#currentCityHeader");
 var weatherDetailsArea = $("#weatherDetailsArea");
+var fiveDayHeader = $("#fiveDayHeader");
 var fiveDayForecastArea = $("#fiveDayForecastArea");
 var weatherAPIKey = config.MY_KEY;
 
@@ -50,7 +51,7 @@ function weatherData(query) {
             });
         }
         uvAPICall();
-        
+
         currentCityHeader.text(currentCity + " (" + date + ") ");
         currentCityHeader.append(iconImg);
         weatherDetailsArea.append(weatherDiv);
@@ -69,6 +70,17 @@ function fiveDayData(query) {
         method: "GET"
     }).then(function (response) {
         // Create 5 cards, fill with data
+
+        
+
+
+
+        var cardGroupDiv = $("<div class='card-group'>");
+        for (){}
+       
+
+        fiveDayForecastArea.append(cardGroupDiv);
+
     });
 }
 
