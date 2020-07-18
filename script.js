@@ -82,7 +82,8 @@ function fiveDayData(query) {
         fiveDayForecastArea.append(cardGroupDiv);
 
         for (j = 0; j < fiveCards.length; j++) {
-            var card = $("<div class='card text-white bg-primary mb-3'>");
+            var card = $("<div class='card text-white bg-primary mb-3' style='max-width: 18rem;'>");
+            card.attr("data-cardNumber", j);
             var date = new Date((response.list[j].dt + response.city.timezone) * 1000).toLocaleDateString("en-US");
             var cardHeader = $("<div class='card-header'>").text(date);
             var cardBody = $("<div class='card-body'>");
