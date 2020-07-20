@@ -1,0 +1,39 @@
+.weather-nav{
+    margin-bottom: 2em;
+    width: 100%;
+}
+
+.h1 {
+    font-size: xx-large;
+}
+
+#currentCityHeader {
+    margin-top: 1em;
+}
+
+#weatherDetailsArea{
+    display: inline-block;
+    border-radius: 25px;
+    border-width: 1px;
+    border-style: solid;
+    padding: 1em;
+    margin: .5em;
+}
+
+#search-field{
+    display: flex;
+    justify-items: center;
+}
+
+#fiveDayHeader {
+    margin-top: 1em;
+}
+
+.forecast-day-header{
+    font-size: small;
+    font-weight: bold;
+}
+
+.forecast-day {
+    font-size: smaller;
+}

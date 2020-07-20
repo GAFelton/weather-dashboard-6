@@ -14,6 +14,16 @@ function round(value, decimals) {
     return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
 }
 
+// $(window).on("load, resize", (function dropdownToggle() {
+//     var viewportWidth = $(window).width();
+//     if (viewportWidth > 992) {
+//         $(".dropdown-menu").addClass("show");
+//     }
+//     else {
+//         $(".dropdown-menu").removeClass("show"); 
+//     }
+// }));
+
 function weatherData(query) {
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
@@ -82,11 +92,11 @@ function fiveDayData(query) {
         fiveDayForecastArea.append(cardGroupDiv);
 
         for (j = 0; j < fiveCards.length; j++) {
-            var card = $("<div class='card text-white bg-primary mb-3' style='max-width: 18rem;'>");
+            var card = $("<div class='card text-white bg-primary mb-3' style='min-width: 106px; max-width: 18rem;'>");
             card.attr("data-cardNumber", j);
             var date = new Date((response.list[j].dt + response.city.timezone) * 1000).toLocaleDateString("en-US");
-            var cardHeader = $("<div class='card-header'>").text(date);
-            var cardBody = $("<div class='card-body'>");
+            var cardHeader = $("<div class='card-header forecast-day-header'>").text(date);
+            var cardBody = $("<div class='card-body forecast-day'>");
             var dayIcon = response.list[j].weather[0].icon;
             var iconURL = "http://openweathermap.org/img/w/" + dayIcon + ".png";
             var cardIcon = $("<img>").attr("src", iconURL);
@@ -109,10 +119,15 @@ function pullSearches() {
     if (JSON.parse(localStorage.getItem("savedSearches")) !== null) {
         savedSearches = JSON.parse(localStorage.getItem("savedSearches"));
         previousSearchesArea.empty();
-        var searchList = $("<div class='list-group'>");
+        var searchList = $("<div class='list-group search-list'>");
+        // var searchList = $("<div class='dropdown-menu search-list'>");
+        // var previousTitle = $("<h3 class='dropdown-header dropdown-toggle' data-toggle='dropdown'> Previous Searches </h3>");
+        // searchList.append(previousTitle);
         for (i = 0; i < savedSearches.length; i++) {
-            var searchItem = $("<a class='list-group-item list-group-item-action'>");
+            var searchItem = $("<a class='list-group-item list-group-item-action search-list-item'>");
+            // var searchItem = $("<a class='dropdown-item search-list-item'>");
             var searchText = savedSearches[i];
+            // var searchDivider = $("<div class='dropdown-divider'>");
             searchItem.text(searchText);
             searchItem.on("click", function () {
                 runSearch($(this).text());
@@ -120,8 +135,10 @@ function pullSearches() {
                 $(this).addClass("active");
             })
             searchList.append(searchItem);
+            // searchList.append(searchDivider);
         }
-        var removeButton = $("<a class='list-group-item list-group-item-action'>");
+        var removeButton = $("<a class='list-group-item list-group-item-action search-list-item'>");
+        // var removeButton = $("<a class='dropdown-item search-list-item'>");
         removeButton.text("Delete List");
         removeButton.on("click", function () {
             localStorage.removeItem("savedSearches");
