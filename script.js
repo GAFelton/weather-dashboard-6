@@ -116,6 +116,7 @@ function pullSearches() {
             searchItem.text(searchText);
             searchItem.on("click", function () {
                 runSearch($(this).text());
+                $('.active').removeClass('active');
                 $(this).addClass("active");
             })
             searchList.append(searchItem);
@@ -162,7 +163,13 @@ function runSearch(thisSearch) {
     fiveDayData(thisSearch);
 }
 
-pullSearches();
+function init(){
+    pullSearches();    
+    var initSearch = savedSearches[0];
+    runSearch(initSearch);
+}
+
+init();
 
 /* PSEUDOCODE:
 -weatherData api call function
