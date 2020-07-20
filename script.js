@@ -105,8 +105,40 @@ function fiveDayData(query) {
     });
 }
 
+function pullSearches() {
+    savedSearches = JSON.parse(localStorage.getItem(savedSearches));
+    if (savedSearches === null) {
+        return;
+    }
+    else {
+        previousSearchesArea.empty();
+        var searchList = $("<div class='list-group'>");
+        for (i = 0; i < savedSearches.length; i++) {
+            var searchItem = $("<a class='list-group-item list-group-item-action'");
+            var searchText = savedSearches.i;
+            searchItem.text(searchText);
+            searchItem.on("click", function () {
+                runSearch(searchText);
+                searchItem.addClass("active");
+            })
+            searchList.append(searchItem);
+        }
+        previousSearchesArea.append(searchList);
+    }
+}
+/*
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+    Cras justo odio
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+  <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+  <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+  <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a>
+</div>
+*/
 
-function saveSearch(){
+function saveSearch() {
     var thisSearch = searchBar.val().trim();
     savedSearches.push(thisSearch);
     localStorage.setItem(JSON.stringify(savedSearches));
@@ -116,12 +148,18 @@ SearchBarButton.on("click", function (event) {
     event.preventDefault();
     var thisSearch = searchBar.val().trim();
     saveSearch();
+    runSearch(thisSearch);
+})
+
+function runSearch(thisSearch) {
     weatherDetailsArea.empty();
     fiveDayForecastArea.empty();
     console.log(thisSearch);
     weatherData(thisSearch);
     fiveDayData(thisSearch);
-})
+}
+
+pullSearches();
 
 /* PSEUDOCODE:
 -weatherData api call function
