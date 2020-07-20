@@ -106,23 +106,28 @@ function fiveDayData(query) {
 }
 
 function pullSearches() {
-    savedSearches = JSON.parse(localStorage.getItem(savedSearches));
-    if (savedSearches === null) {
-        return;
-    }
-    else {
+    if (JSON.parse(localStorage.getItem("savedSearches")) !== null) {
+        savedSearches = JSON.parse(localStorage.getItem("savedSearches"));
         previousSearchesArea.empty();
         var searchList = $("<div class='list-group'>");
         for (i = 0; i < savedSearches.length; i++) {
-            var searchItem = $("<a class='list-group-item list-group-item-action'");
+            var searchItem = $("<a class='list-group-item list-group-item-action'>");
             var searchText = savedSearches[i];
             searchItem.text(searchText);
             searchItem.on("click", function () {
-                runSearch(searchText);
-                searchItem.addClass("active");
+                runSearch($(this).text());
+                $(this).addClass("active");
             })
             searchList.append(searchItem);
         }
+        var removeButton = $("<a class='list-group-item list-group-item-action'>");
+        removeButton.text("Delete List");
+        removeButton.on("click", function () {
+            localStorage.removeItem("savedSearches");
+            savedSearches = [];
+            previousSearchesArea.empty();
+        })
+        searchList.append(removeButton);
         previousSearchesArea.append(searchList);
     }
 }
@@ -130,16 +135,23 @@ function pullSearches() {
 
 SearchBarButton.on("click", function (event) {
     event.preventDefault();
-    var thisSearch = searchBar.val().trim();
-    console.log(thisSearch);
-    saveSearch(thisSearch);
-    runSearch(thisSearch);
+    if (searchBar.val().trim() !== "") {
+        var thisSearch = searchBar.val().trim();
+        console.log(thisSearch);
+        saveSearch(thisSearch);
+        runSearch(thisSearch);
+        pullSearches();
+    }
+    else {
+        alert("Please enter a valid search.");
+    }
+    searchBar.val("");
 })
 
 function saveSearch(searchValue) {
+    savedSearches.unshift(searchValue);
     console.log(savedSearches);
-    savedSearches = savedSearches.unshift(searchValue);
-    localStorage.setItem(JSON.stringify(savedSearches));
+    localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
 }
 
 function runSearch(thisSearch) {
