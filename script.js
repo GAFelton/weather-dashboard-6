@@ -115,7 +115,7 @@ function pullSearches() {
         var searchList = $("<div class='list-group'>");
         for (i = 0; i < savedSearches.length; i++) {
             var searchItem = $("<a class='list-group-item list-group-item-action'");
-            var searchText = savedSearches.i;
+            var searchText = savedSearches[i];
             searchItem.text(searchText);
             searchItem.on("click", function () {
                 runSearch(searchText);
@@ -127,18 +127,20 @@ function pullSearches() {
     }
 }
 
-function saveSearch() {
-    var thisSearch = searchBar.val().trim();
-    savedSearches.push(thisSearch);
-    localStorage.setItem(JSON.stringify(savedSearches));
-}
 
 SearchBarButton.on("click", function (event) {
     event.preventDefault();
     var thisSearch = searchBar.val().trim();
-    saveSearch();
+    console.log(thisSearch);
+    saveSearch(thisSearch);
     runSearch(thisSearch);
 })
+
+function saveSearch(searchValue) {
+    console.log(savedSearches);
+    savedSearches = savedSearches.unshift(searchValue);
+    localStorage.setItem(JSON.stringify(savedSearches));
+}
 
 function runSearch(thisSearch) {
     weatherDetailsArea.empty();
