@@ -7,6 +7,7 @@ var weatherDetailsArea = $("#weatherDetailsArea");
 var fiveDayHeader = $("#fiveDayHeader");
 var fiveDayForecastArea = $("#fiveDayForecastArea");
 var weatherAPIKey = config.MY_KEY;
+var savedSearches = [];
 
 //Function to round to first decimal place - for temperature. - From Jack Moore ("https://www.jacklmoore.com/notes/rounding-in-javascript/")
 function round(value, decimals) {
@@ -104,9 +105,17 @@ function fiveDayData(query) {
     });
 }
 
+
+function saveSearch(){
+    var thisSearch = searchBar.val().trim();
+    savedSearches.push(thisSearch);
+    localStorage.setItem(JSON.stringify(savedSearches));
+}
+
 SearchBarButton.on("click", function (event) {
     event.preventDefault();
     var thisSearch = searchBar.val().trim();
+    saveSearch();
     weatherDetailsArea.empty();
     fiveDayForecastArea.empty();
     console.log(thisSearch);
