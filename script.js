@@ -1,6 +1,6 @@
 var searchArea = $("#searchArea");
 var searchBar = $("#searchBar");
-var SearchBarButton = $("#searchBarButton");
+var SearchBarButton = $("#button-addon2");
 var previousSearchesArea = $("#previousSearchesArea");
 var currentCityHeader = $("#currentCityHeader");
 var weatherDetailsArea = $("#weatherDetailsArea");
@@ -30,6 +30,10 @@ function weatherData(query) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
+        if (response.cod == "404") {
+            alert("City Not Found. Weather was probably too hot to handle!");
+        }
+        else {
         var currentCity = response.name;
         var weatherDiv = $("<div class='weather'>");
         var date = new Date((response.dt + response.timezone) * 1000).toLocaleDateString("en-US");
@@ -70,7 +74,7 @@ function weatherData(query) {
         weatherDiv.append(humiditySection);
         weatherDiv.append(windSpeedSection);
         weatherDiv.append(uvIndexDiv);
-
+    }
     });
 }
 
@@ -80,37 +84,42 @@ function fiveDayData(query) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        // Create 5 cards, fill with data
-        var fiveCards = [];
-        for (i = 0; i < response.list.length; i += 8) {
-            var time = new Date((response.list[i].dt + response.city.timezone) * 1000).toLocaleTimeString("en-US");
-            fiveCards.push(time);
+        if (response.cod == "404") {
+            alert("City Not Found. Weather was probably too hot to handle!");
         }
-        console.log(fiveCards);
-        fiveDayHeader.text("5 Day Forecast:");
-        var cardGroupDiv = $("<div class='card-deck'>");
-        fiveDayForecastArea.append(cardGroupDiv);
+        else {
+            // Create 5 cards, fill with data
+            var fiveCards = [];
+            for (i = 0; i < response.list.length; i += 8) {
+                var time = new Date((response.list[i].dt + response.city.timezone) * 1000).toLocaleTimeString("en-US");
+                fiveCards.push(time);
+            }
+            console.log(fiveCards);
+            fiveDayHeader.text("5 Day Forecast:");
+            var cardGroupDiv = $("<div class='card-deck'>");
+            fiveDayForecastArea.append(cardGroupDiv);
 
-        for (j = 0; j < fiveCards.length; j++) {
-            var card = $("<div class='card text-white bg-primary mb-3' style='min-width: 106px; max-width: 18rem;'>");
-            card.attr("data-cardNumber", j);
-            var date = new Date((response.list[j].dt + response.city.timezone) * 1000).toLocaleDateString("en-US");
-            var cardHeader = $("<div class='card-header forecast-day-header'>").text(date);
-            var cardBody = $("<div class='card-body forecast-day'>");
-            var dayIcon = response.list[j].weather[0].icon;
-            var iconURL = "http://openweathermap.org/img/w/" + dayIcon + ".png";
-            var cardIcon = $("<img>").attr("src", iconURL);
-            var tempF = (response.list[j].main.temp - 273.15) * 1.80 + 32;
-            tempF = round(tempF, 1);
-            var cardTemp = $("<p class='card-text'>Temp: " + tempF + "&#8457;</p>");
-            var cardHumidity = $("<p class='card-text'>").text("Humidity: " + response.list[j].main.humidity + "%");
+            for (j = 0; j < fiveCards.length; j++) {
+                var card = $("<div class='card text-white bg-primary mb-3' style='min-width: 106px; max-width: 18rem;'>");
+                card.attr("data-cardNumber", j);
+                var date = new Date((response.list[j].dt + response.city.timezone) * 1000).toLocaleDateString("en-US");
+                var cardHeader = $("<div class='card-header forecast-day-header'>").text(date);
+                var cardBody = $("<div class='card-body forecast-day'>");
+                var dayIcon = response.list[j].weather[0].icon;
+                var iconURL = "http://openweathermap.org/img/w/" + dayIcon + ".png";
+                var cardIcon = $("<img>").attr("src", iconURL);
+                var tempF = (response.list[j].main.temp - 273.15) * 1.80 + 32;
+                tempF = round(tempF, 1);
+                var cardTemp = $("<p class='card-text'>Temp: " + tempF + "&#8457;</p>");
+                var cardHumidity = $("<p class='card-text'>").text("Humidity: " + response.list[j].main.humidity + "%");
 
-            cardGroupDiv.append(card);
-            card.append(cardHeader);
-            card.append(cardBody);
-            cardBody.append(cardIcon);
-            cardBody.append(cardTemp);
-            cardBody.append(cardHumidity);
+                cardGroupDiv.append(card);
+                card.append(cardHeader);
+                card.append(cardBody);
+                cardBody.append(cardIcon);
+                cardBody.append(cardTemp);
+                cardBody.append(cardHumidity);
+            }
         }
     });
 }
@@ -160,6 +169,7 @@ SearchBarButton.on("click", function (event) {
         runSearch(thisSearch);
         pullSearches();
     }
+
     else {
         alert("Please enter a valid search.");
     }
@@ -180,8 +190,8 @@ function runSearch(thisSearch) {
     fiveDayData(thisSearch);
 }
 
-function init(){
-    pullSearches();    
+function init() {
+    pullSearches();
     var initSearch = savedSearches[0];
     runSearch(initSearch);
 }

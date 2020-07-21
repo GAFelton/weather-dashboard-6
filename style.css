@@ -1,6 +1,6 @@
 .weather-nav{
-    margin-bottom: 2em;
     width: 100%;
+    justify-content: center;
 }
 
 .h1 {
@@ -18,11 +18,17 @@
     border-style: solid;
     padding: 1em;
     margin: .5em;
+    margin-top: 2em;
 }
 
-#search-field{
-    display: flex;
-    justify-items: center;
+#search-column{
+    background-color: rgb(230, 230, 230);
+    align-content: center;
+}
+
+#searchArea {
+    margin-top: 2em;
+    margin-left: .5em;
 }
 
 #fiveDayHeader {
@@ -37,3 +43,15 @@
 .forecast-day {
     font-size: smaller;
 }
+
+@media (min-width:768px) {
+    .weather-nav{
+        justify-content: left;
+    }
+}
+/* 
+@media (min-width:576px) {
+    #searchArea {
+        mx-auto
+    }
+} */

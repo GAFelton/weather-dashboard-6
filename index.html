@@ -15,62 +15,60 @@
     <nav class="navbar navbar-dark bg-dark weather-nav">
         <a class="navbar-brand h1">Weather Dashboard</a>
     </nav>
-
-    <div class="row">
-        <div class="col-lg-1"> </div> <!-- Empty Column -->
-        <div class="clearfix col-lg-2 col-md-3 col-sm-4 col-xs-12">
-            <!-- This aside contains City Search & the list of previously searched cities. -->
-            <aside class="float-left" id="searchArea">
-                <h4> Search for a City:</h4>
-                <form id="search-field">
-                    <div class="form-group">
+    <!-- <div class="container"> -->
+        <div class="row">
+            <!-- <div class="col-lg-1"> </div> Empty Column -->
+            <div class="clearfix col-md-3 col-sm-4 col-s-12" id="search-column">
+                <!-- This aside contains City Search & the list of previously searched cities. -->
+                <aside class="float-left" id="searchArea">
+                    <h4> Search for a City:</h4>
+                    <form>
                         <small id="searchHelp" class="form-text text-muted">Search by "City" or "City,
                             State."</small>
-                        <div class="row">
-                            <div class="col">
-                                <input type="search" class="form-control" id="searchBar" aria-describedby="searchHelp"
-                                    placeholder="Enter City">
-                            </div>
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary mb-2" id="searchBarButton">Submit</button>
+                        <div class="input-group mb-3">
+                            <input type="search" class="form-control" id="searchBar" aria-describedby="searchHelp"
+                                placeholder="Enter City">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                    id="button-addon2">Submit</button>
                             </div>
                         </div>
+                    </form>
+
+                    <div id="previousSearchesArea">
+
                     </div>
-                </form>
 
-                <div id="previousSearchesArea">
+                </aside>
+            </div>
 
-                </div>
+            <!-- This section contains the main data viewing area for the dashboard app. -->
 
-            </aside>
+            <div class="clearfix col-md-9 col-sm-8 col-s-12">
+                <section>
+                    <!-- Main Weather Details -->
+                    <div>
+                        <h2 id="currentCityHeader"></h2>
+                        <div id="weatherDetailsArea">
+
+
+                        </div>
+                    </div>
+
+
+                    <!-- 5 Day Forecast -->
+                    <div>
+                        <h3 id="fiveDayHeader"></h3>
+                        <div id="fiveDayForecastArea">
+
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- <div class="col-lg-1"> </div> Empty Column -->
         </div>
-
-        <!-- This section contains the main data viewing area for the dashboard app. -->
-
-        <div class="clearfix col-lg-8 col-md-9 col-sm-8 col-xs-12">
-            <section>
-                <!-- Main Weather Details -->
-                <div>
-                    <h2 id="currentCityHeader"></h2>
-                    <div id="weatherDetailsArea">
-
-
-                    </div>
-                </div>
-
-
-                <!-- 5 Day Forecast -->
-                <div>
-                    <h3 id="fiveDayHeader"></h3>
-                    <div id="fiveDayForecastArea">
-
-
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="col-lg-1"> </div> <!-- Empty Column-->
-    </div>
+    <!-- </div> (end of .container div)-->
 
 
 
