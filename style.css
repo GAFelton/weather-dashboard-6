@@ -12,7 +12,7 @@
 }
 
 #weatherDetailsArea{
-    display: inline-block;
+    display: none;
     border-radius: 25px;
     border-width: 1px;
     border-style: solid;
@@ -29,6 +29,12 @@
 #searchArea {
     margin-top: 2em;
     margin-left: .5em;
+}
+
+#error {
+    color: red;
+    align-self: center;
+    text-align: center;
 }
 
 #fiveDayHeader {
