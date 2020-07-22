@@ -59,8 +59,27 @@ function weatherData(query) {
                 method: "GET"
             }).then(function (uvresponse) {
                 var uvIndex = uvresponse.value;
+                if (uvIndex <= 2){
+                    uvIndexDiv.css("background-color", "#3EA72D");
+                    uvIndexDiv.css("color", "#ffffff");
+                }
+                if (uvIndex > 2 && uvIndex < 6){
+                    uvIndexDiv.css("background-color", "#FFF300");
+                    uvIndexDiv.css("color", "#000000");
+                }
+                if (uvIndex > 5 && uvIndex < 8){
+                    uvIndexDiv.css("background-color", "#F18B00");
+                    uvIndexDiv.css("color", "#000000");
+                }
+                if (uvIndex > 7 && uvIndex < 11){
+                    uvIndexDiv.css("background-color", "#E53210");
+                    uvIndexDiv.css("color", "#ffffff");
+                }
+                if (uvIndex >= 11){
+                    uvIndexDiv.css("background-color", "#B567A4");
+                    uvIndexDiv.css("color", "#ffffff");
+                }
                 uvIndexDiv.text("UV Index: " + uvIndex);
-                console.log("UV Index: " + uvIndex);
             });
         }
         uvAPICall();
