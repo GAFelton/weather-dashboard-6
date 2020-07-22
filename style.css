@@ -24,6 +24,7 @@
 #search-column{
     background-color: rgb(230, 230, 230);
     align-content: center;
+    padding-bottom: 1em;
 }
 
 #searchArea {

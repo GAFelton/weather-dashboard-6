@@ -76,11 +76,11 @@ function weatherData(query) {
 
         saveSearch(currentCity);
     })
-    .catch(e => {
-        var errorMessage = e.responseJSON.message;
-        errorMessage = errorMessage.substr(0,1).toUpperCase()+errorMessage.substr(1);
-        $("#error").text(errorMessage + ".");
-    });
+        .catch(e => {
+            var errorMessage = e.responseJSON.message;
+            errorMessage = errorMessage.substr(0, 1).toUpperCase() + errorMessage.substr(1);
+            $("#error").text(errorMessage + ".");
+        });
 }
 
 function fiveDayData(query) {
@@ -90,32 +90,32 @@ function fiveDayData(query) {
         method: "GET"
     }).then(function (response) {
 
-            fiveDayHeader.text("5 Day Forecast:");
-            var cardGroupDiv = $("<div class='card-deck'>");
-            fiveDayForecastArea.append(cardGroupDiv);
+        fiveDayHeader.text("5 Day Forecast:");
+        var cardGroupDiv = $("<div class='card-deck'>");
+        fiveDayForecastArea.append(cardGroupDiv);
 
-            for (j = 0; j < response.list.length; j+= 8) {
-                var card = $("<div class='card text-white bg-primary mb-3' style='min-width: 106px; max-width: 18rem;'>");
-                card.attr("data-cardNumber", j);
+        for (j = 0; j < response.list.length; j += 8) {
+            var card = $("<div class='card text-white bg-primary mb-3' style='min-width: 106px; max-width: 18rem;'>");
+            card.attr("data-cardNumber", j);
 
-                var date = new Date((response.list[j].dt + response.city.timezone) * 1000).toLocaleDateString("en-US");
-                var cardHeader = $("<div class='card-header forecast-day-header'>").text(date);
-                var cardBody = $("<div class='card-body forecast-day'>");
-                var dayIcon = response.list[j].weather[0].icon;
-                var iconURL = "http://openweathermap.org/img/w/" + dayIcon + ".png";
-                var cardIcon = $("<img>").attr("src", iconURL);
-                var tempF = (response.list[j].main.temp - 273.15) * 1.80 + 32;
-                tempF = round(tempF, 1);
-                var cardTemp = $("<p class='card-text'>Temp: " + tempF + "&#8457;</p>");
-                var cardHumidity = $("<p class='card-text'>").text("Humidity: " + response.list[j].main.humidity + "%");
+            var date = new Date((response.list[j].dt + response.city.timezone) * 1000).toLocaleDateString("en-US");
+            var cardHeader = $("<div class='card-header forecast-day-header'>").text(date);
+            var cardBody = $("<div class='card-body forecast-day'>");
+            var dayIcon = response.list[j].weather[0].icon;
+            var iconURL = "http://openweathermap.org/img/w/" + dayIcon + ".png";
+            var cardIcon = $("<img>").attr("src", iconURL);
+            var tempF = (response.list[j].main.temp - 273.15) * 1.80 + 32;
+            tempF = round(tempF, 1);
+            var cardTemp = $("<p class='card-text'>Temp: " + tempF + "&#8457;</p>");
+            var cardHumidity = $("<p class='card-text'>").text("Humidity: " + response.list[j].main.humidity + "%");
 
-                cardGroupDiv.append(card);
-                card.append(cardHeader);
-                card.append(cardBody);
-                cardBody.append(cardIcon);
-                cardBody.append(cardTemp);
-                cardBody.append(cardHumidity);
-            }
+            cardGroupDiv.append(card);
+            card.append(cardHeader);
+            card.append(cardBody);
+            cardBody.append(cardIcon);
+            cardBody.append(cardTemp);
+            cardBody.append(cardHumidity);
+        }
     })
 }
 
@@ -174,8 +174,8 @@ SearchBarButton.on("click", function (event) {
 function saveSearch(searchValue) {
 
     if (!savedSearches.includes(searchValue)) {
-    savedSearches.unshift(searchValue);
-    console.log(savedSearches);
+        savedSearches.unshift(searchValue);
+        console.log(savedSearches);
     }
     localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
     pullSearches();
@@ -192,7 +192,7 @@ function runSearch(thisSearch) {
 function init() {
     pullSearches();
     var initSearch = savedSearches[0];
-    if (initSearch) {runSearch(initSearch);}
+    if (initSearch) { runSearch(initSearch); }
 }
 
 init();
