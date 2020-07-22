@@ -3,7 +3,7 @@
 
 To create a responsive webpage that uses the openweathermap API to pull and display up-to-date weather information. The page should include current weather data, a 5 day forecast, and a search area containing previous searches (which are stored in local storage).
 
-![Weather Dashboard Screenshot](./assets/weather-dashboard-screenshot.jpg)
+![Weather Dashboard Screenshot](./Assets/weather-dashboard-screenshot.jpg)
 
 [Link to Deployed Project](https://gafelton.github.io/weather-dashboard-6/)
 
