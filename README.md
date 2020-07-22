@@ -1,279 +1,29 @@
-# weather-dashboard-6
-Homework Assignment #6: Weather Dashboard
+# Homework Assignment #6: Weather Dashboard
+## Goal:
+
+To create a responsive webpage that uses the openweathermap API to pull and display up-to-date weather information. The page should include current weather data, a 5 day forecast, and a search area containing previous searches (which are stored in local storage).
+
+![Weather Dashboard Screenshot](./assets/weather-dashboard-screenshot.jpg)
+
+[Link to Deployed Project](https://gafelton.github.io/weather-dashboard-6/)
 
 
 
-* Goal
-* Screenshot
-* Link to Deployed Project
-* Description/Details
+## Description:
 
+This was a very satisfying project. I am glad to have started learning about 3rd party APIs, because they can give me so much functionality as a lone developer! I could actually use this webpage in my daily life!
 
+Getting into the specifics, I have two main API calls - for the current weather data and the 5 day forecast. The UV index is also a separate API call nested within the current weather data call. Nearly all page elements are dynamically generated - the page first loads with just a search bar.
 
+Previous searches are stored in localStorage, and if the user revisits the page their most recent search will populate the page. Users have the option to delete this list of previous searches. Additionally, if the list starts getting too long, it will collapse the list and allow access via a button.
 
-
+I also implemented error messaging for 404 or other problems, and stop users from making blank searches. If a user searches for the same city twice, it will not populate the previous searches list twice.
 
 API Keys are stored in a config.js file, as an object to be referenced. This is normally done so that keys are not accessible on GitHub. I have not included the config file in gitignore so the deployed page still works, but I wanted to get in the habit of doing this.
 
 
-*delete below*
 
----
+## The Freezer:
 
-\# Unit 06 Server-Side APIs Homework: Weather Dashboard
+If I were to spend more time working on this project, I would have liked to run the first API call based on the user's current location. I also would have liked to add more precise responsive styling  to the forecast cards.
 
-
-
-Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. In this homework assignment, your challenge is to build a weather dashboard using the OpenWeather API.
-
-
-
-\## Instructions
-
-
-
-Build a weather dashboard application with search functionality to find current weather conditions and the future weather outlook for multiple cities. Following the [common templates for user stories](https://en.wikipedia.org/wiki/User_story#Common_templates), we can frame this challenge as follows:
-
-
-
-\```
-
-As a traveler
-
-I want to see the weather outlook for multiple cities
-
-so that I can plan a trip accordingly
-
-\```
-
-
-
-How do you deliver this? Here are some guidelines:
-
-
-
-\- Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that will provide basic setup and usage instructions.
-
-
-
-\- Use AJAX to hook into the API to retrieve data in JSON format.
-
-
-
-\- Your app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
-
-
-
-\- Display the following under current weather conditions:
-
-
-
- \- City
-
-
-
- \- Date
-
-
-
- \- Icon image (visual representation of weather conditions)
-
-
-
- \- Temperature
-
-
-
- \- Humidity
-
-
-
- \- Wind speed
-
-
-
- \- UV index
-
-
-
-\- Include a search history so that users can access their past search terms. Clicking on the city name should perform a new search that returns current and future conditions for that city.
-
-
-
-\- Include a 5-Day Forecast below the current weather conditions. Each day for the 5-Day Forecast should display the following:
-
-
-
- \- Date
-
-
-
- \- Icon image (visual representation of weather conditions)
-
-
-
- \- Temperature
-
-
-
- \- Humidity
-
-
-
-![weather dashboard](./Assets/06-Server-Side-APIs-homework-demo.png)
-
-
-
-\### Hints
-
-
-
-\- Create multiple functions within your application to handle the different parts of the dashboard:
-
-
-
- \- Current conditions
-
-
-
- \- 5-Day Forecast
-
-
-
- \- Search history
-
-
-
- \- UV index
-
-
-
-\- You will need to make more than one AJAX call.
-
-
-
-\- You will need to hardcode some of the parameters in the API's URL. User input will determine some of the other parameters.
-
-
-
-\- Use `localStorage` to store any persistent data.
-
-
-
-\## Minimum Requirements
-
-
-
-\- Functional, deployed application.
-
-
-
-\- GitHub repository with a unique name and a README describing the project.
-
-
-
-\- User can search for weather reports by city using the openweathermap API.
-
-
-
-\- After searching for a city, the following information is displayed:
-
-
-
- \- Current temperature
-
-
-
- \- Current humidity
-
-
-
- \- Windspeed
-
-
-
- \- Uv index
-
-
-
- \- 5 day forecast
-
-
-
-\- Application uses icons to represent weather conditions.
-
-
-
-\- Application stores previously searched for cities in localstorage and displays them to the user.
-
-
-
-\- Application loads last searched city forecast on page load.
-
-
-
-\## Bonus
-
-
-
-\- Use the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) to add the user's current location to the initial landing page.
-
-
-
-\- Add the application to your portfolio.
-
-
-
-\## Commit Early and Often
-
-
-
-One of the most important skills to master as a web developer is version control. Building the habit of committing via Git is important for two reasons:
-
-
-
-\- Your commit history is a signal to employers that you are actively working on projects and learning new skills.
-
-
-
-\- Your commit history allows you to revert your codebase in the event that you need to return to a previous state.
-
-
-
-Follow these guidelines for committing:
-
-
-
-\- Make single-purpose commits for related changes to ensure a clean, manageable history. If you are fixing two issues, make two commits.
-
-
-
-\- Write descriptive, meaningful commit messages so that you and anyone else looking at your repository can easily understand its history.
-
-
-
-\- Don't commit half-done work, for the sake of your collaborators (and your future self!).
-
-
-
-\- Test your application before you commit to ensure functionality at every step in the development process.
-
-
-
-We would like you to have well over 200 commits by graduation, so commit early and often!
-
-
-
-\## Submission on BCS
-
-
-
-You are required to submit the following:
-
-
-
-\- The URL of the deployed application
-
-
-
-\- The URL of the GitHub repository
