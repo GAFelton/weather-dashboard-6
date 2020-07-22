@@ -142,6 +142,7 @@ function pullSearches() {
     if (JSON.parse(localStorage.getItem("savedSearches")) !== null) {
         savedSearches = JSON.parse(localStorage.getItem("savedSearches"));
         previousSearchesArea.empty();
+        var collapseDiv = $("<div class='collapse' id='collapseSearches'>")
         var searchList = $("<div class='list-group search-list'>");
         // var searchList = $("<div class='dropdown-menu search-list'>");
         // var previousTitle = $("<h3 class='dropdown-header dropdown-toggle' data-toggle='dropdown'> Previous Searches </h3>");
@@ -169,7 +170,15 @@ function pullSearches() {
             previousSearchesArea.empty();
         })
         searchList.append(removeButton);
+        if (savedSearches.length < 5) {
         previousSearchesArea.append(searchList);
+        }
+        if (savedSearches.length > 4) {
+            var collapseButton = $("<button class='btn btn-outline-secondary' type='button' data-toggle='collapse' data-target='#collapseSearches'> Previous Searches </button>")
+            collapseDiv.append(searchList);
+            previousSearchesArea.append(collapseButton);
+            previousSearchesArea.append(collapseDiv);
+        }
     }
 }
 
