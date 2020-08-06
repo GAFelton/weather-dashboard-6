@@ -6,7 +6,7 @@ var currentCityHeader = $("#currentCityHeader");
 var weatherDetailsArea = $("#weatherDetailsArea");
 var fiveDayHeader = $("#fiveDayHeader");
 var fiveDayForecastArea = $("#fiveDayForecastArea");
-var weatherAPIKey = config.MY_KEY;
+var weatherAPIKey = "2122eef2fda3d5843063388d30e29a7c";
 var savedSearches = [];
 
 //Function to round to first decimal place - for temperature. - From Jack Moore ("https://www.jacklmoore.com/notes/rounding-in-javascript/")
