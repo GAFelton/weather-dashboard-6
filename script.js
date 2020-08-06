@@ -44,7 +44,7 @@ function weatherData(query) {
         var windSpeed = response.wind.speed;
         var windSpeedSection = $("<p> Wind Speed: " + windSpeed + "MPH </p>");
         var iconIs = response.weather[0].icon;
-        var iconURL = "http://openweathermap.org/img/w/" + iconIs + ".png";
+        var iconURL = "https://openweathermap.org/img/w/" + iconIs + ".png";
         console.log(iconURL);
         var iconImg = $("<img class='weatherIcon'>");
         iconImg.attr('src', iconURL);
@@ -121,7 +121,7 @@ function fiveDayData(query) {
             var cardHeader = $("<div class='card-header forecast-day-header'>").text(date);
             var cardBody = $("<div class='card-body forecast-day'>");
             var dayIcon = response.list[j].weather[0].icon;
-            var iconURL = "http://openweathermap.org/img/w/" + dayIcon + ".png";
+            var iconURL = "https://openweathermap.org/img/w/" + dayIcon + ".png";
             var cardIcon = $("<img>").attr("src", iconURL);
             var tempF = (response.list[j].main.temp - 273.15) * 1.80 + 32;
             tempF = round(tempF, 1);
