@@ -25,7 +25,7 @@ function round(value, decimals) {
 // }));
 
 function weatherData(query) {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + weatherAPIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -53,7 +53,7 @@ function weatherData(query) {
         var uvIndexDiv = $("<div id='uvIndex'>");
 
         function uvAPICall() {
-            var uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + weatherAPIKey + "&lat=" + lat + "&lon=" + lon;
+            var uvQueryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + weatherAPIKey + "&lat=" + lat + "&lon=" + lon;
             $.ajax({
                 url: uvQueryURL,
                 method: "GET"
@@ -103,7 +103,7 @@ function weatherData(query) {
 }
 
 function fiveDayData(query) {
-    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + query + "&appid=" + weatherAPIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + query + "&appid=" + weatherAPIKey;
     $.ajax({
         url: queryURL,
         method: "GET"
